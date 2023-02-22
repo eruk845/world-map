@@ -1,0 +1,50 @@
+First, you will need to include the Leaflet library in your HTML file by adding the following code:
+
+
+<head>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha384-UZw92MJ1fI3q8oGJTAQv12RtZXrt+oH9Jr5r5nK1pFwWKzJ+CtOH+ysGxDxK/yyL" crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha384-Fcx5R9Ygk5D5Bb1IUN6oiwUgHXzU4W8y1xHx1yrnnyq3F/hS3ZZh6L2Efxclw+V7" crossorigin=""></script>
+</head>
+
+
+Then, you can create a div in your HTML file where the map will be displayed:
+
+
+<div id="mapid" style="height: 500px;"></div>
+
+
+Now, you can create a JavaScript file and initialize the map:
+
+
+// create the map
+const mymap = L.map('mapid').setView([51.505, -0.09], 13);
+
+// add the tile layer
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+  maxZoom: 18,
+  id: 'mapbox.streets',
+  tileSize: 512,
+  zoomOffset: -1
+}).addTo(mymap);
+
+
+This code will create a map centered on the coordinates [51.505, -0.09] and add a tile layer from OpenStreetMap.
+
+To allow the user to zoom in to a settlement and street, you can add a marker and a popup:
+
+
+// create a marker
+const marker = L.marker([51.5, -0.09]).addTo(mymap);
+
+// create a popup
+const popup = L.popup()
+  .setLatLng([51.5, -0.09])
+  .setContent("I am a popup.")
+  .openOn(mymap);
+
+// zoom to the marker
+mymap.setView([51.5, -0.09], 15);
+
+
+This code will add a marker at the coordinates [51.5, -0.09] and a popup with some content. The map will then be zoomed to the marker's location.
